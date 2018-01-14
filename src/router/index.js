@@ -10,6 +10,9 @@ import Buttons from '@/views/components/Buttons'
 import Page404 from '@/views/errorPages/Page404'
 import Page500 from '@/views/errorPages/Page500'
 
+// Views - Views
+import Test from '@/views/Test'
+
 
 /* login */
 const Login = _import('login/index');
@@ -30,12 +33,30 @@ export const constantRouterMap = [
 
 ]
 
-export default new Router({
-  mode: 'hash', 
+// export default new Router({
+//   mode: 'hash', 
+//   linkActiveClass: 'open active',
+//   scrollBehavior: () => ({ y: 0 }),
+//   routes: constantRouterMap
+// });
+
+const router = new Router({
+  mode: 'hash',
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 });
+
+router.beforeEach((to, from, next) => {
+  console.group('Route Info')
+  console.log(to)
+  console.log(from)
+  console.log(next)
+  console.groupEnd()
+  next()
+})
+
+export default router
 
 export const asyncRouterMap = [
 
@@ -78,7 +99,11 @@ export const asyncRouterMap = [
       {path: '/tabledetail/:id',name: 'TableDetail', hidden:true, component: _import('TableDetail')},
       {path: '/tinymce',name: 'Tinymce编辑器',icon:"android-document",component: _import('Tinymce')},
       {path: '/markdown',name: 'Markdown',icon:"android-list",component: _import('Markdown')},
-      
+      {
+        path: '/Test',
+        name: 'TKS TESTING PAGE',
+        component: Test
+      }
     ]
   },
 
